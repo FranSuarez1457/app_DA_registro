@@ -16,7 +16,7 @@ import es.ulpgc.eite.da.templatedemo.second.SecondActivity;
 // Project: Template Demo
 // Created by Luis Hernandez on 17/6/24.
 // Copyright (c) 2024 EITE (ULPGC).
-public class FirstActivity
+public class   FirstActivity
     extends AppCompatActivity implements FirstContract.View {
 
     public static String TAG = "FirstActivity";
