@@ -1,0 +1,26 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "email": "admin@empresa.com",
+      "password": "123",
+      "nombre": "Administrador"
+    }
+  ],
+  "proyectos": [
+    {
+      "id": 1,
+      "nombre": "Proyecto Alpha",
+      "descripcion": "Descripción del proyecto",
+      "fechaInicio": "2026-06-01"
+    }
+  ],
+  "tareas": [
+    {
+      "id": 101,
+      "proyectoId": 1,
+      "nombre": "Diseñar base de datos",
+      "responsable": "Juan"
+    }
+  ]
+}
