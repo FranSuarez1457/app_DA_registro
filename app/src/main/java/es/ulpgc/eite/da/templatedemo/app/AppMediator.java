@@ -11,6 +11,7 @@ import es.ulpgc.eite.da.templatedemo.projectList.projectListState;
 import es.ulpgc.eite.da.templatedemo.projectDetail.projectDetailState;
 import es.ulpgc.eite.da.templatedemo.registerProject.registerProjectState;
 import es.ulpgc.eite.da.templatedemo.registerTask.registerTaskState;
+import es.ulpgc.eite.da.templatedemo.registerUser.registerUserState; // Añadido
 import es.ulpgc.eite.da.templatedemo.status.statusState;
 
 // Importa tus Activities
@@ -20,6 +21,7 @@ import es.ulpgc.eite.da.templatedemo.projectList.projectListActivity;
 import es.ulpgc.eite.da.templatedemo.projectDetail.projectDetailActivity;
 import es.ulpgc.eite.da.templatedemo.registerProject.registerProjectActivity;
 import es.ulpgc.eite.da.templatedemo.registerTask.registerTaskActivity;
+import es.ulpgc.eite.da.templatedemo.registerUser.registerUserActivity; // Añadido
 import es.ulpgc.eite.da.templatedemo.status.statusActivity;
 
 public class AppMediator {
@@ -34,6 +36,7 @@ public class AppMediator {
     private projectDetailState savedProjectDetailState;
     private registerProjectState savedRegisterProjectState;
     private registerTaskState savedRegisterTaskState;
+    private registerUserState savedRegisterUserState; // Añadido
     private statusState savedStatusState;
 
     private AppMediator() { Log.e(TAG, "AppMediator creado"); }
@@ -62,6 +65,10 @@ public class AppMediator {
     public registerTaskState getRegisterTaskState() { return savedRegisterTaskState; }
     public void setRegisterTaskState(registerTaskState state) { savedRegisterTaskState = state; }
 
+    // Añadido
+    public registerUserState getRegisterUserState() { return savedRegisterUserState; }
+    public void setRegisterUserState(registerUserState state) { savedRegisterUserState = state; }
+
     public statusState getStatusState() { return savedStatusState; }
     public void setStatusState(statusState state) { savedStatusState = state; }
 
@@ -89,6 +96,11 @@ public class AppMediator {
 
     public void goToRegisterTask(Context context) {
         context.startActivity(new Intent(context, registerTaskActivity.class));
+    }
+
+    // Añadido
+    public void goToRegisterUser(Context context) {
+        context.startActivity(new Intent(context, registerUserActivity.class));
     }
 
     public void goToStatus(Context context) {

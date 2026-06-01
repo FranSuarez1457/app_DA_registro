@@ -60,12 +60,11 @@ public class loginActivity extends AppCompatActivity implements loginContract.Vi
             }
         });
 
-        // Botón Crear Usuario (De momento vacío hasta que hagamos esa pantalla)
+        // Botón Crear Usuario (¡Ahora sí, navega al registro!)
         btnLoginRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Aquí llamaremos al mediador para ir a la pantalla de registro:
-                // AppMediator.getInstance().goToRegisterUser(loginActivity.this);
+                AppMediator.getInstance().goToRegisterUser(loginActivity.this);
             }
         });
     }

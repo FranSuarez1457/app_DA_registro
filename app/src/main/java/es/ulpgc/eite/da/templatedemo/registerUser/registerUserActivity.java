@@ -12,42 +12,40 @@ public class registerUserActivity extends AppCompatActivity implements registerU
 
     private registerUserContract.Presenter presenter;
 
-    // Variables (Tendremos que ajustar los IDs cuando me pases tu XML)
-    private EditText etName;
+    // Variables con los nombres exactos de tu XML
     private EditText etEmail;
     private EditText etPassword;
-    private Button btnRegister;
+    private EditText etCompanyCode;
+    private Button btnRegisterContinue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Apuntamos a tu archivo XML
+        // Apuntamos a tu archivo register_user.xml
         setContentView(R.layout.register_user);
 
-        // Enlazamos vistas (saldrán en rojo hasta que ajustemos los IDs)
-        /*
-        etName = findViewById(R.id.etRegName);
-        etEmail = findViewById(R.id.etRegEmail);
-        etPassword = findViewById(R.id.etRegPassword);
-        btnRegister = findViewById(R.id.btnRegSubmit);
+        // 1. Enlazamos las vistas
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        etCompanyCode = findViewById(R.id.etCompanyCode);
+        btnRegisterContinue = findViewById(R.id.btnRegisterContinue);
 
+        // 2. Configuramos el módulo (ensamblador MVP)
         registerUserScreen.configure(this);
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        // 3. Programar el clic del botón
+        btnRegisterContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onRegisterButtonClicked(
-                    etEmail.getText().toString(),
-                    etPassword.getText().toString(),
-                    etName.getText().toString()
-                );
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+                String companyCode = etCompanyCode.getText().toString();
+
+                // Le pasamos los datos al Presenter
+                presenter.onRegisterButtonClicked(email, password, companyCode);
             }
         });
-        */
-
-        // Lo configuramos aunque los botones estén comentados para que no dé error
-        registerUserScreen.configure(this);
     }
 
     @Override
@@ -63,7 +61,7 @@ public class registerUserActivity extends AppCompatActivity implements registerU
 
     @Override
     public void displayData(registerUserViewModel viewModel) {
-        // Pintar errores si los hubiera
+        // Aquí pintaríamos errores en pantalla si los hubiera
     }
 
     @Override
