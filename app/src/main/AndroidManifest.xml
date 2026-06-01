@@ -27,6 +27,7 @@
         <activity android:name=".projectDetail.projectDetailActivity" android:exported="false"/>
         <activity android:name=".registerProject.registerProjectActivity" android:exported="false"/>
         <activity android:name=".registerTask.registerTaskActivity" android:exported="false"/>
+        <activity android:name=".registerUser.registerUserActivity" android:exported="false"/>
         <activity android:name=".status.statusActivity" android:exported="false"/>
 
     </application>
