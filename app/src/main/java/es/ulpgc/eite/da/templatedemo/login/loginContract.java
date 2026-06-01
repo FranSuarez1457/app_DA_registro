@@ -1,22 +1,24 @@
 package es.ulpgc.eite.da.templatedemo.login;
 
+import java.lang.ref.WeakReference; // ¡Esta es la línea clave que faltaba!
+
 public interface loginContract {
 
     interface View {
         void injectPresenter(Presenter presenter);
         void displayData(loginViewModel viewModel);
-        void navigateToHome(); // Orden de saltar de pantalla
+        void navigateToHome();
     }
 
     interface Presenter {
-        void injectView(View view);
+        // AQUÍ ESTABA EL ERROR: Ahora sí coinciden todos usando WeakReference
+        void injectView(WeakReference<View> view);
         void injectModel(Model model);
         void onResume();
-        void onLoginButtonClicked(String email, String password); // Acción del usuario
+        void onLoginButtonClicked(String email, String password);
     }
 
     interface Model {
-        // Devuelve true si el usuario es correcto, false si no lo es
         boolean validateCredentials(String email, String password);
     }
 }
