@@ -14,7 +14,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".first.FirstActivity"
+            android:name=".login.loginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,13 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".second.SecondActivity"
-            android:exported="false"/>
+        <activity android:name=".home.homeActivity" android:exported="false"/>
+        <activity android:name=".projectList.projectListActivity" android:exported="false"/>
+        <activity android:name=".projectDetail.projectDetailActivity" android:exported="false"/>
+        <activity android:name=".registerProject.registerProjectActivity" android:exported="false"/>
+        <activity android:name=".registerTask.registerTaskActivity" android:exported="false"/>
+        <activity android:name=".status.statusActivity" android:exported="false"/>
+
     </application>
 
 </manifest>
