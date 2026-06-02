@@ -1,8 +1,6 @@
 package es.ulpgc.eite.da.templatedemo.registerProject;
 
 import java.lang.ref.WeakReference;
-import es.ulpgc.eite.da.templatedemo.app.AppMediator;
-import es.ulpgc.eite.da.templatedemo.status.statusState; // Importamos el estado del Status
 
 public class registerProjectPresenter implements registerProjectContract.Presenter {
 
@@ -30,24 +28,15 @@ public class registerProjectPresenter implements registerProjectContract.Present
     }
 
     @Override
-    public void onRegisterBtnClicked(String name, String description, String date) {
-        // 1. Intentamos guardar el proyecto
-        boolean isSuccess = model.registerNewProject(name, description, date);
-
-        // 2. Preparamos el "paquete" de estado para la pantalla Status
-        statusState newStatus = new statusState();
-        newStatus.isSuccess = isSuccess;
+    public void onSaveButtonClicked(String projectName, String projectDescription) {
+        // Le pedimos al modelo que guarde
+        boolean isSuccess = model.saveProject(projectName, projectDescription);
 
         if (isSuccess) {
-            newStatus.message = "El proyecto '" + name + "' se ha creado correctamente. Contacte con el administrador si necesita asignar personal.";
+            // Si va bien, cerramos la pantalla de creación
+            view.get().finishView();
         } else {
-            newStatus.message = "Error: El nombre del proyecto no puede estar vacío. Por favor, inténtelo de nuevo.";
+            // Aquí podríamos decirle a la vista que muestre un error
         }
-
-        // 3. Se lo guardamos al Mediador
-        AppMediator.getInstance().setStatusState(newStatus);
-
-        // 4. Damos la orden de saltar de pantalla
-        view.get().navigateToStatus();
     }
 }

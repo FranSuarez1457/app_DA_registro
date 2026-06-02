@@ -46,25 +46,26 @@ public class loginActivity extends AppCompatActivity implements loginContract.Vi
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
-                // Le pasamos los datos al Presenter para que valide (admin@empresa.com / 123)
+                // Le pasamos los datos al Presenter para que valide en la base de datos
                 presenter.onLoginButtonClicked(email, password);
             }
         });
 
-        // Botón Invitado (De momento lo mandamos directo al Home para que puedas probar)
+        // Botón Invitado
         btnLoginGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppMediator.getInstance().goToHome(loginActivity.this);
-                finish();
+                // El Presenter limpia la sesión y nos manda al Home
+                presenter.onGuestButtonClicked();
             }
         });
 
-        // Botón Crear Usuario (¡Ahora sí, navega al registro!)
+        // Botón Crear Usuario
         btnLoginRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppMediator.getInstance().goToRegisterUser(loginActivity.this);
+                // Le decimos al Presenter que queremos ir al registro (Cumpliendo MVP estricto)
+                presenter.onRegisterButtonClicked();
             }
         });
     }
@@ -82,14 +83,19 @@ public class loginActivity extends AppCompatActivity implements loginContract.Vi
 
     @Override
     public void displayData(loginViewModel viewModel) {
-        // Como no pusiste un TextView para errores en el XML, dejamos esto vacío por ahora.
-        // Si más adelante quieres mostrar el error de "Contraseña incorrecta", lo añadiremos.
+        // Vacío por ahora
     }
+
+    // --- MÉTODOS DEL CONTRATO QUE EL PRESENTER USARÁ PARA NAVEGAR ---
 
     @Override
     public void navigateToHome() {
-        // Usamos el Mediador para saltar de pantalla al hacer login con éxito
         AppMediator.getInstance().goToHome(this);
         finish(); // Cerramos el login para que el usuario no pueda volver atrás
+    }
+
+    @Override
+    public void navigateToRegister() {
+        AppMediator.getInstance().goToRegisterUser(this);
     }
 }

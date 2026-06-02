@@ -1,24 +1,30 @@
 package es.ulpgc.eite.da.templatedemo.login;
 
-import java.lang.ref.WeakReference; // ¡Esta es la línea clave que faltaba!
+import java.lang.ref.WeakReference;
 
 public interface loginContract {
 
     interface View {
         void injectPresenter(Presenter presenter);
         void displayData(loginViewModel viewModel);
+        // Métodos de navegación que ya deberías tener en tu Activity
         void navigateToHome();
+        void navigateToRegister();
     }
 
     interface Presenter {
-        // AQUÍ ESTABA EL ERROR: Ahora sí coinciden todos usando WeakReference
         void injectView(WeakReference<View> view);
         void injectModel(Model model);
         void onResume();
+
         void onLoginButtonClicked(String email, String password);
+        void onRegisterButtonClicked();
+        void onGuestButtonClicked();
     }
 
     interface Model {
-        boolean validateCredentials(String email, String password);
+
+        boolean loginUser(String email, String password);
+        void loginGuest();
     }
 }

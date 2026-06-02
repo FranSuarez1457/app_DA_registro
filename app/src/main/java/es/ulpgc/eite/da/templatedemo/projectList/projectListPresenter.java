@@ -1,6 +1,10 @@
 package es.ulpgc.eite.da.templatedemo.projectList;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+import es.ulpgc.eite.da.templatedemo.app.AppMediator;
+import es.ulpgc.eite.da.templatedemo.database.ProjectEntity;
 
 public class projectListPresenter implements projectListContract.Presenter {
 
@@ -24,16 +28,29 @@ public class projectListPresenter implements projectListContract.Presenter {
 
     @Override
     public void onResume() {
-        // Pedimos los proyectos al modelo y actualizamos la vista
-        state.projectList = model.getSimulatedProjects();
+        List<ProjectEntity> realProjects;
+
+        // ¡EL INTERRUPTOR EN ACCIÓN!
+        if (AppMediator.getInstance().isFavoriteFilterActive) {
+            realProjects = model.getFavoriteProjects();
+        } else {
+            realProjects = model.getProjectList();
+        }
+
+        // Extraemos solo el "nombre" de cada proyecto para la vista
+        List<String> projectNames = new ArrayList<>();
+        if (realProjects != null) {
+            for (ProjectEntity project : realProjects) {
+                projectNames.add(project.name);
+            }
+        }
+
+        state.projectList = projectNames;
         view.get().displayData(state);
     }
 
     @Override
     public void onProjectClicked(String projectName) {
-        // En el futuro, aquí le diremos al Mediador: "Oye, guarda este proyecto
-        // para que la pantalla de Detalles sepa cuál enseñar".
-
         view.get().navigateToProjectDetail();
     }
 }

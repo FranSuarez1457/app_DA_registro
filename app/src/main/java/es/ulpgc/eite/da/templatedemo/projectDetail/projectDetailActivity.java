@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast; // Importante para el mensaje flotante
 import androidx.appcompat.app.AppCompatActivity;
 
 import es.ulpgc.eite.da.templatedemo.R;
@@ -32,11 +33,12 @@ public class projectDetailActivity extends AppCompatActivity implements projectD
         // 2. Ensamblador
         projectDetailScreen.configure(this);
 
-        // 3. Programar el clic en la estrella
+        // 3. Programar el clic en la estrella (Ajustado al nombre del contrato)
         btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onFavoriteBtnClicked();
+                // ¡AQUÍ ESTABA EL ERROR DE NOMBRE!
+                presenter.onFavoriteButtonClicked();
             }
         });
     }
@@ -63,13 +65,18 @@ public class projectDetailActivity extends AppCompatActivity implements projectD
         updateFavoriteIcon(viewModel.isFavorite);
     }
 
-    @Override
     public void updateFavoriteIcon(boolean isFavorite) {
-        // Dependiendo de si es favorito o no, ponemos la estrella encendida o apagada
         if (isFavorite) {
             btnFavorite.setImageResource(android.R.drawable.btn_star_big_on);
         } else {
             btnFavorite.setImageResource(android.R.drawable.btn_star_big_off);
         }
+    }
+
+    @Override
+    public void showFavoriteAddedMessage() {
+        Toast.makeText(this, "Añadido a favoritos", Toast.LENGTH_SHORT).show();
+
+        updateFavoriteIcon(true);
     }
 }

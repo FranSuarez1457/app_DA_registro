@@ -8,11 +8,9 @@ public class homePresenter implements homeContract.Presenter {
     private WeakReference<homeContract.View> view;
     private homeState state;
     private homeContract.Model model;
-    private AppMediator mediator;
 
     public homePresenter(homeState state) {
         this.state = state;
-        this.mediator = AppMediator.getInstance();
     }
 
     @Override
@@ -27,27 +25,40 @@ public class homePresenter implements homeContract.Presenter {
 
     @Override
     public void onResume() {
-        state.welcomeMessage = "Bienvenido, " + model.getUserName();
         view.get().displayData(state);
     }
 
     @Override
     public void onRegisterProjectBtnClicked() {
-        view.get().navigateToRegisterProject();
+        if (model.isGuestUser()) {
+            view.get().showGuestMessage();
+        } else {
+            view.get().navigateToRegisterProject();
+        }
     }
 
     @Override
     public void onRegisterTaskBtnClicked() {
-        view.get().navigateToRegisterTask();
+        if (model.isGuestUser()) {
+            view.get().showGuestMessage();
+        } else {
+            view.get().navigateToRegisterTask();
+        }
     }
 
     @Override
     public void onProjectListBtnClicked() {
+        // Apagamos el filtro para ver todos los proyectos
+        AppMediator.getInstance().isFavoriteFilterActive = false;
         view.get().navigateToProjectList();
     }
 
     @Override
     public void onFavoritesBtnClicked() {
-        view.get().navigateToFavorites();
+        // Encendemos el filtro para ver solo favoritos
+        AppMediator.getInstance().isFavoriteFilterActive = true;
+
+        // ¡OJO! Viajamos a la MISMA pantalla de proyectos, reciclando la vista
+        view.get().navigateToProjectList();
     }
 }

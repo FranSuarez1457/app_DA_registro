@@ -7,18 +7,18 @@ public interface projectDetailContract {
     interface View {
         void injectPresenter(Presenter presenter);
         void displayData(projectDetailViewModel viewModel);
-        void updateFavoriteIcon(boolean isFavorite); // Para cambiar la estrella de vacía a llena
+        void showFavoriteAddedMessage(); // NUEVO: Para avisar al usuario de que se guardó
     }
 
     interface Presenter {
         void injectView(WeakReference<View> view);
         void injectModel(Model model);
         void onResume();
-        void onFavoriteBtnClicked(); // Cuando el usuario toque la estrella
+        void onFavoriteButtonClicked(); // NUEVO: Reacciona al botón de la estrella
     }
 
     interface Model {
-        // En el futuro, buscará los datos reales del proyecto en la BBDD
-        projectDetailState getSimulatedProject();
+        // Devuelve true si se guarda correctamente
+        boolean addToFavorites();
     }
 }

@@ -7,27 +7,24 @@ public interface homeContract {
     interface View {
         void injectPresenter(Presenter presenter);
         void displayData(homeViewModel viewModel);
-
-        // Rutas de navegación actualizadas según tu XML
         void navigateToRegisterProject();
         void navigateToRegisterTask();
         void navigateToProjectList();
-        void navigateToFavorites();
+        void showGuestMessage();
+        void showFavoritesMessage(); // <-- AÑADE ESTA LÍNEA
     }
 
     interface Presenter {
         void injectView(WeakReference<View> view);
         void injectModel(Model model);
         void onResume();
-
-        // Clics de tus cuatro botones
         void onRegisterProjectBtnClicked();
         void onRegisterTaskBtnClicked();
         void onProjectListBtnClicked();
-        void onFavoritesBtnClicked();
+        void onFavoritesBtnClicked(); // <-- AÑADE ESTA LÍNEA
     }
 
     interface Model {
-        String getUserName();
+        boolean isGuestUser();
     }
 }

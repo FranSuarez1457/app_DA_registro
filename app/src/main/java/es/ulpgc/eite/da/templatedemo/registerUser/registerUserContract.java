@@ -14,11 +14,10 @@ public interface registerUserContract {
         void injectView(WeakReference<View> view);
         void injectModel(Model model);
         void onResume();
-        // Solo recibe dos parámetros ahora
         void onRegisterButtonClicked(String email, String password);
     }
 
     interface Model {
-        // En el futuro, aquí se guardará en base de datos
+        boolean registerNewUser(String email, String password);
     }
 }

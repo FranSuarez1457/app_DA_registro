@@ -100,9 +100,17 @@ public class homeActivity extends AppCompatActivity implements homeContract.View
     }
 
     @Override
-    public void navigateToFavorites() {
+    public void showFavoritesMessage() {
         // Como aún no tenemos una Activity específica para favoritos en el Manifiesto ni Mediador,
         // dejamos un aviso temporal para que la app no se cierre al pulsarlo.
         Toast.makeText(this, "Pantalla de Favoritos en construcción", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showGuestMessage() {
+        // Importa android.widget.Toast si te sale en rojo (Alt + Enter)
+        android.widget.Toast.makeText(this,
+                "Modo Invitado: Permisos insuficientes para crear registros.",
+                android.widget.Toast.LENGTH_LONG).show();
     }
 }

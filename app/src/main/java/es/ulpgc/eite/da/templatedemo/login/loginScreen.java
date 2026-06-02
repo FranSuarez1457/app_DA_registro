@@ -7,8 +7,7 @@ import es.ulpgc.eite.da.templatedemo.app.AppMediator;
 public class loginScreen {
 
     public static void configure(loginContract.View view) {
-        WeakReference<FragmentActivity> context =
-                new WeakReference<>((FragmentActivity) view);
+        WeakReference<FragmentActivity> context = new WeakReference<>((FragmentActivity) view);
 
         AppMediator mediator = AppMediator.getInstance();
         loginState state = mediator.getLoginState();
@@ -18,7 +17,8 @@ public class loginScreen {
         }
 
         loginContract.Presenter presenter = new loginPresenter(state);
-        loginContract.Model model = new loginModel();
+
+        loginContract.Model model = new loginModel(context.get());
 
         presenter.injectModel(model);
         presenter.injectView(new WeakReference<>(view));

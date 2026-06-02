@@ -38,17 +38,16 @@ public class registerProjectActivity extends AppCompatActivity implements regist
         // 2. Configuramos el ensamblador
         registerProjectScreen.configure(this);
 
-        // 3. Programamos el clic del botón
+        // 3. Programamos el clic del botón ajustado al contrato
         btnSubmitProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Recogemos lo que el usuario ha escrito
                 String name = etProjectName.getText().toString();
                 String description = etProjectDescription.getText().toString();
-                String date = etProjectDate.getText().toString();
 
-                // Se lo pasamos al Presenter
-                presenter.onRegisterBtnClicked(name, description, date);
+                // Se lo pasamos al Presenter (Usando el método exacto del contrato)
+                presenter.onSaveButtonClicked(name, description);
             }
         });
     }
@@ -66,13 +65,15 @@ public class registerProjectActivity extends AppCompatActivity implements regist
 
     @Override
     public void displayData(registerProjectViewModel viewModel) {
-        // En el futuro, aquí pondremos el nombre de la compañía que saque del Mediador:
-        // tvCompanyBarRegProject.setText(nombreCompañia);
+        // En el futuro, aquí pondremos el nombre de la compañía que saque del Mediador
     }
 
+    // --- MÉTODO EXIGIDO POR EL CONTRATO ---
     @Override
-    public void navigateToStatus() {
-        AppMediator.getInstance().goToStatus(this);
-        finish(); // Cerramos la pantalla de registro para que no se quede abierta de fondo
+    public void finishView() {
+        // Cuando el proyecto se guarde con éxito en la base de datos,
+        // volvemos directamente a la lista de proyectos para que el usuario vea que se ha añadido.
+        AppMediator.getInstance().goToProjectList(this);
+        finish(); // Destruimos la pantalla de registro
     }
 }

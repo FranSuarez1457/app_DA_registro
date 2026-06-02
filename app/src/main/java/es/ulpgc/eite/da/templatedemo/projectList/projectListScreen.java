@@ -17,7 +17,8 @@ public class projectListScreen {
         }
 
         projectListContract.Presenter presenter = new projectListPresenter(state);
-        projectListContract.Model model = new projectListModel();
+
+        projectListContract.Model model = new projectListModel(context.get());
 
         presenter.injectModel(model);
         presenter.injectView(new WeakReference<>(view));
