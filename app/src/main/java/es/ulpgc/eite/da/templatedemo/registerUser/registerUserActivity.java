@@ -12,38 +12,29 @@ public class registerUserActivity extends AppCompatActivity implements registerU
 
     private registerUserContract.Presenter presenter;
 
-    // Variables con los nombres exactos de tu XML
     private EditText etEmail;
     private EditText etPassword;
-    private EditText etCompanyCode;
     private Button btnRegisterContinue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Apuntamos a tu archivo register_user.xml
         setContentView(R.layout.register_user);
 
-        // 1. Enlazamos las vistas
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        etCompanyCode = findViewById(R.id.etCompanyCode);
         btnRegisterContinue = findViewById(R.id.btnRegisterContinue);
 
-        // 2. Configuramos el módulo (ensamblador MVP)
         registerUserScreen.configure(this);
 
-        // 3. Programar el clic del botón
         btnRegisterContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
-                String companyCode = etCompanyCode.getText().toString();
 
-                // Le pasamos los datos al Presenter
-                presenter.onRegisterButtonClicked(email, password, companyCode);
+                // Le pasamos solo email y contraseña al Presenter
+                presenter.onRegisterButtonClicked(email, password);
             }
         });
     }
@@ -61,11 +52,11 @@ public class registerUserActivity extends AppCompatActivity implements registerU
 
     @Override
     public void displayData(registerUserViewModel viewModel) {
-        // Aquí pintaríamos errores en pantalla si los hubiera
+        // Reservado para mostrar errores
     }
 
     @Override
     public void finishView() {
-        finish(); // Cierra esta pantalla y te devuelve automáticamente al Login
+        finish();
     }
 }

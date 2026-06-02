@@ -10,11 +10,12 @@
         android:id="@+id/tvCompanyBar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background=""
+        android:background="#1976D2"
         android:gravity="center_vertical"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:textColor=""
+        android:text="RegistroApp"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +42,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:text="Regístrese con su correo para entrar en la aplicación. En caso de pertenecer a una compañía, contacte con el servicio informático de su empresa para que le facilite el código de acceso."
+        android:text="Regístrese con su correo para entrar en la aplicación. En caso de pertenecer a una compañía, contacte con el servicio informático de su empresa para que le facilite sus credenciales."
         android:textAlignment="center"
         android:textColor="#666666"
         android:textSize="14sp"
@@ -81,22 +82,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
-    <EditText
-        android:id="@+id/etCompanyCode"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@android:drawable/editbox_background"
-        android:hint="Código de autorización"
-        android:inputType="text"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
-
     <Button
         android:id="@+id/btnRegisterContinue"
         android:layout_width="0dp"
@@ -110,6 +95,6 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCompanyCode" />
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

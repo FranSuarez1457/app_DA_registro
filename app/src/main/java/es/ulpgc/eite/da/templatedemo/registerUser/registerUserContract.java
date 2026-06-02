@@ -7,17 +7,18 @@ public interface registerUserContract {
     interface View {
         void injectPresenter(Presenter presenter);
         void displayData(registerUserViewModel viewModel);
-        void finishView(); // Para volver al Login al terminar
+        void finishView();
     }
 
     interface Presenter {
         void injectView(WeakReference<View> view);
         void injectModel(Model model);
         void onResume();
-        void onRegisterButtonClicked(String email, String password, String name);
+        // Solo recibe dos parámetros ahora
+        void onRegisterButtonClicked(String email, String password);
     }
 
     interface Model {
-        boolean registerNewUser(String email, String password, String name);
+        // En el futuro, aquí se guardará en base de datos
     }
 }

@@ -28,15 +28,8 @@ public class registerUserPresenter implements registerUserContract.Presenter {
     }
 
     @Override
-    public void onRegisterButtonClicked(String email, String password, String name) {
-        boolean isRegistered = model.registerNewUser(email, password, name);
-
-        if (isRegistered) {
-            // Si el registro va bien, cerramos la pantalla para volver al Login
-            view.get().finishView();
-        } else {
-            state.errorMessage = "Error al crear el usuario";
-            view.get().displayData(state);
-        }
+    public void onRegisterButtonClicked(String email, String password) {
+        // Aquí en el futuro se validará el correo y la contraseña
+        view.get().finishView();
     }
 }
