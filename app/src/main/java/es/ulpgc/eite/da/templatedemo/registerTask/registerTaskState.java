@@ -1,4 +1,5 @@
 package es.ulpgc.eite.da.templatedemo.registerTask;
 
-public class registerTaskState {
+public class registerTaskState extends registerTaskViewModel {
+    // Hereda del ViewModel
 }
