@@ -306,7 +306,7 @@ public class VisualUITest {
     }
 
     @Test
-    public void visualTest_11_theGrandFinale() throws InterruptedException {
+    public void visualTest_11() throws InterruptedException {
         injectUniversityMassiveData("ulpgc.es", 2000);
         injectUniversityMassiveData("ull.es", 3000);
         injectUniversityMassiveData("upv.es", 4000);
