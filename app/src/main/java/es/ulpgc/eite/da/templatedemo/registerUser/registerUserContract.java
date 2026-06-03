@@ -8,6 +8,7 @@ public interface registerUserContract {
         void injectPresenter(Presenter presenter);
         void displayData(registerUserViewModel viewModel);
         void finishView();
+        void showErrorMessage();
     }
 
     interface Presenter {

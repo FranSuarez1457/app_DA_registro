@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import es.ulpgc.eite.da.templatedemo.R;
@@ -55,5 +57,11 @@ public class registerUserActivity extends AppCompatActivity implements registerU
     @Override
     public void finishView() {
         finish();
+    }
+
+    @Override
+    public void showErrorMessage() {
+        TextView tvError = findViewById(R.id.tvRegisterError);
+        tvError.setVisibility(View.VISIBLE); // Mostramos el texto rojo
     }
 }

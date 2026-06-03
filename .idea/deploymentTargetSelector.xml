@@ -19,6 +19,9 @@
       <SelectionState runConfigName="VisualUITest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="visualTest_12_duplicateRegistration_showsError()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

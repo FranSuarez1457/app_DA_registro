@@ -23,6 +23,7 @@ import es.ulpgc.eite.da.templatedemo.database.AppDataBase;
 import es.ulpgc.eite.da.templatedemo.database.UserEntity;
 import es.ulpgc.eite.da.templatedemo.database.ProjectEntity;
 import es.ulpgc.eite.da.templatedemo.login.loginActivity;
+import es.ulpgc.eite.da.templatedemo.registerUser.registerUserActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class VisualUITest {
@@ -353,4 +354,24 @@ public class VisualUITest {
         Espresso.onView(ViewMatchers.withId(R.id.tvListTitle))
                 .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     }
+
+    @Test
+    public void visualTest_12_duplicateRegistration_showsError() throws InterruptedException {
+        injectTestUser("juan@ulpgc.es", "ulpgc.es");
+
+        ActivityScenario.launch(registerUserActivity.class);
+        Thread.sleep(1000);
+
+        Espresso.onView(ViewMatchers.withId(R.id.etEmail)).perform(ViewActions.replaceText("juan@ulpgc.es"));
+        Espresso.onView(ViewMatchers.withId(R.id.etPassword)).perform(ViewActions.replaceText("123"));
+        Espresso.closeSoftKeyboard();
+
+        Espresso.onView(ViewMatchers.withId(R.id.btnRegisterContinue)).perform(forceClick());
+
+        Thread.sleep(1500);
+
+        Espresso.onView(ViewMatchers.withId(R.id.tvRegisterError))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
 }

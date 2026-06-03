@@ -18,15 +18,16 @@ public class registerUserModel implements registerUserContract.Model {
             return false;
         }
 
+        UserEntity existente = db.userDao().getUserByEmail(email);
+
+        if (existente != null) {
+            return false;
+        }
+
         UserEntity newUser = new UserEntity();
         newUser.email = email;
         newUser.password = password;
-
-        if (email.contains("@")) {
-            newUser.companyDomain = email.split("@")[1];
-        } else {
-            newUser.companyDomain = "independiente";
-        }
+        newUser.companyDomain = email.contains("@") ? email.split("@")[1] : "independiente";
 
         db.userDao().insertUser(newUser);
 
