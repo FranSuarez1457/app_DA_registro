@@ -33,23 +33,11 @@ public class projectListModel implements projectListContract.Model {
         }
     }
 
-    // --- EL CEREBRO DEL FILTRO ---
     @Override
     public List<ProjectEntity> getFavoriteProjects() {
         UserEntity currentUser = AppMediator.getInstance().getLoggedUser();
         if (currentUser == null) return new ArrayList<>();
 
-        // Buscamos los favoritos reales
-        List<FavoriteEntity> favorites = db.favoriteDao().getFavoritesByUser(currentUser.email);
-        List<ProjectEntity> filteredProjects = new ArrayList<>();
-
-        // Extraemos los nombres y los empaquetamos como proyectos para no romper la pantalla
-        for(FavoriteEntity fav : favorites) {
-            ProjectEntity project = new ProjectEntity();
-            project.name = fav.projectName;
-            filteredProjects.add(project);
-        }
-
-        return filteredProjects;
+        return db.favoriteDao().getFavoriteProjectsForUser(currentUser.email);
     }
 }

@@ -3,6 +3,7 @@ package es.ulpgc.eite.da.templatedemo.app;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import es.ulpgc.eite.da.templatedemo.database.*;
 
 // Importa todos tus estados
 import es.ulpgc.eite.da.templatedemo.home.homeState;
@@ -11,7 +12,7 @@ import es.ulpgc.eite.da.templatedemo.projectList.projectListState;
 import es.ulpgc.eite.da.templatedemo.projectDetail.projectDetailState;
 import es.ulpgc.eite.da.templatedemo.registerProject.registerProjectState;
 import es.ulpgc.eite.da.templatedemo.registerTask.registerTaskState;
-import es.ulpgc.eite.da.templatedemo.registerUser.registerUserState; // Añadido
+import es.ulpgc.eite.da.templatedemo.registerUser.registerUserState;
 import es.ulpgc.eite.da.templatedemo.status.statusState;
 
 // Importa tus Activities
@@ -21,13 +22,16 @@ import es.ulpgc.eite.da.templatedemo.projectList.projectListActivity;
 import es.ulpgc.eite.da.templatedemo.projectDetail.projectDetailActivity;
 import es.ulpgc.eite.da.templatedemo.registerProject.registerProjectActivity;
 import es.ulpgc.eite.da.templatedemo.registerTask.registerTaskActivity;
-import es.ulpgc.eite.da.templatedemo.registerUser.registerUserActivity; // Añadido
+import es.ulpgc.eite.da.templatedemo.registerUser.registerUserActivity;
 import es.ulpgc.eite.da.templatedemo.status.statusActivity;
 
 public class AppMediator {
 
     public static String TAG = "AppMediator";
     private static AppMediator INSTANCE;
+
+    // --- ¡NUESTRO INTERRUPTOR PARA EL FILTRO! ---
+    public boolean isFavoriteFilterActive = false;
 
     // Estados guardados
     private homeState savedHomeState;
@@ -36,9 +40,18 @@ public class AppMediator {
     private projectDetailState savedProjectDetailState;
     private registerProjectState savedRegisterProjectState;
     private registerTaskState savedRegisterTaskState;
-    private registerUserState savedRegisterUserState; // Añadido
+    private registerUserState savedRegisterUserState;
     private statusState savedStatusState;
 
+    private UserEntity loggedUser;
+
+    public UserEntity getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(UserEntity loggedUser) {
+        this.loggedUser = loggedUser;
+    }
     private AppMediator() { Log.e(TAG, "AppMediator creado"); }
 
     public static AppMediator getInstance() {
@@ -65,7 +78,6 @@ public class AppMediator {
     public registerTaskState getRegisterTaskState() { return savedRegisterTaskState; }
     public void setRegisterTaskState(registerTaskState state) { savedRegisterTaskState = state; }
 
-    // Añadido
     public registerUserState getRegisterUserState() { return savedRegisterUserState; }
     public void setRegisterUserState(registerUserState state) { savedRegisterUserState = state; }
 
@@ -98,7 +110,6 @@ public class AppMediator {
         context.startActivity(new Intent(context, registerTaskActivity.class));
     }
 
-    // Añadido
     public void goToRegisterUser(Context context) {
         context.startActivity(new Intent(context, registerUserActivity.class));
     }
