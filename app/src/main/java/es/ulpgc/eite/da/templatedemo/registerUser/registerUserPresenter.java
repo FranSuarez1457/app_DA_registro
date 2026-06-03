@@ -27,8 +27,6 @@ public class registerUserPresenter implements registerUserContract.Presenter {
         view.get().displayData(state);
     }
 
-
-
     @Override
     public void onRegisterButtonClicked(String email, String password) {
         boolean success = model.registerNewUser(email, password);

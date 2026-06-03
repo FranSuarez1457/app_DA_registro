@@ -374,4 +374,130 @@ public class VisualUITest {
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
+    @Test
+    public void visualTest_13_EmptyEmail_ShowsError() throws InterruptedException {
+        ActivityScenario.launch(registerUserActivity.class);
+        // Dejamos email vacío, ponemos contraseña
+        Espresso.onView(ViewMatchers.withId(R.id.etPassword)).perform(ViewActions.replaceText("123"));
+        Espresso.onView(ViewMatchers.withId(R.id.btnRegisterContinue)).perform(forceClick());
+
+        // Verificamos que el mensaje genérico aparece
+        Espresso.onView(ViewMatchers.withId(R.id.tvRegisterError))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void visualTest_14_InvalidEmailFormat_ShowsError() throws InterruptedException {
+        ActivityScenario.launch(registerUserActivity.class);
+        // Email sin @
+        Espresso.onView(ViewMatchers.withId(R.id.etEmail)).perform(ViewActions.replaceText("usuario-mal-puesto"));
+        Espresso.onView(ViewMatchers.withId(R.id.etPassword)).perform(ViewActions.replaceText("123"));
+        Espresso.onView(ViewMatchers.withId(R.id.btnRegisterContinue)).perform(forceClick());
+
+        Espresso.onView(ViewMatchers.withId(R.id.tvRegisterError))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void visualTest_15_EmptyPassword_ShowsError() throws InterruptedException {
+        ActivityScenario.launch(loginActivity.class);
+        // Email válido, pero contraseña vacía
+        Espresso.onView(ViewMatchers.withId(R.id.etLoginEmail)).perform(ViewActions.replaceText("juan@ulpgc.es"));
+        Espresso.onView(ViewMatchers.withId(R.id.btnLoginContinue)).perform(forceClick());
+
+        Espresso.onView(ViewMatchers.withId(R.id.tvLoginError))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void visualTest_16_WrongPassword_ShowsError() throws InterruptedException {
+        injectTestUser("juan@ulpgc.es", "123");
+        ActivityScenario.launch(loginActivity.class);
+
+        // Email correcto, pero contraseña distinta a "123"
+        Espresso.onView(ViewMatchers.withId(R.id.etLoginEmail)).perform(ViewActions.replaceText("juan@ulpgc.es"));
+        Espresso.onView(ViewMatchers.withId(R.id.etLoginPassword)).perform(ViewActions.replaceText("clave_falsa"));
+        Espresso.onView(ViewMatchers.withId(R.id.btnLoginContinue)).perform(forceClick());
+
+        Espresso.onView(ViewMatchers.withId(R.id.tvLoginError))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void visualTest_17_ProjectNameLimit() throws InterruptedException {
+        injectTestUser("u@u.es", "u.es");
+        ActivityScenario.launch(loginActivity.class);
+        loginVisually("u@u.es", "123");
+        goToProjectListVisually();
+        Espresso.onView(ViewMatchers.withId(R.id.btnNavRegisterProject)).perform(forceClick());
+
+        String longName = "EsteNombreEsExtremadamenteLargoYSuperaLos20Caracteres";
+        String expected = longName.substring(0, 20); // Solo los primeros 20
+
+        Espresso.onView(ViewMatchers.withId(R.id.etProjectName)).perform(ViewActions.replaceText(longName));
+
+        Espresso.onView(ViewMatchers.withId(R.id.etProjectName))
+                .check(ViewAssertions.matches(ViewMatchers.withText(expected)));
+    }
+
+    @Test
+    public void visualTest_18_PasswordLength() throws InterruptedException {
+        ActivityScenario.launch(registerUserActivity.class);
+        Espresso.onView(ViewMatchers.withId(R.id.etEmail)).perform(ViewActions.replaceText("u@u.es"));
+        Espresso.onView(ViewMatchers.withId(R.id.etPassword)).perform(ViewActions.replaceText("1")); // Muy corta
+        Espresso.onView(ViewMatchers.withId(R.id.btnRegisterContinue)).perform(forceClick());
+
+        Espresso.onView(ViewMatchers.withId(R.id.tvRegisterError))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void visualTest_19_BackNavigation() throws InterruptedException {
+        ActivityScenario.launch(loginActivity.class);
+        Espresso.onView(ViewMatchers.withId(R.id.btnLoginRegister)).perform(forceClick());
+        Espresso.pressBack();
+        Espresso.onView(ViewMatchers.withId(R.id.btnLoginContinue))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void visualTest_20_RotateScreen() throws InterruptedException {
+        ActivityScenario<loginActivity> scenario = ActivityScenario.launch(loginActivity.class);
+        Espresso.onView(ViewMatchers.withId(R.id.etLoginEmail)).perform(ViewActions.replaceText("test@test.es"));
+
+        scenario.onActivity(activity -> activity.setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE));
+        Thread.sleep(1000);
+
+        Espresso.onView(ViewMatchers.withId(R.id.etLoginEmail))
+                .check(ViewAssertions.matches(ViewMatchers.withText("test@test.es")));
+    }
+
+    @Test
+    public void visualTest_21_NullPointerStress() throws InterruptedException {
+        ActivityScenario.launch(registerUserActivity.class);
+        // Clics frenéticos
+        for(int i=0; i<5; i++) Espresso.onView(ViewMatchers.withId(R.id.btnRegisterContinue)).perform(forceClick());
+        Thread.sleep(500);
+    }
+
+    @Test
+    public void visualTest_22_MaliciousInput() throws InterruptedException {
+        ActivityScenario.launch(registerUserActivity.class);
+        Espresso.onView(ViewMatchers.withId(R.id.etEmail)).perform(ViewActions.replaceText("<script>alert(1)</script>"));
+        Espresso.onView(ViewMatchers.withId(R.id.btnRegisterContinue)).perform(forceClick());
+        Espresso.onView(ViewMatchers.withId(R.id.tvRegisterError)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void visualTest_23_PersistenceAfterAppKill() throws InterruptedException {
+        injectTestUser("persistent@test.es", "test.es");
+        ActivityScenario<loginActivity> scenario = ActivityScenario.launch(loginActivity.class);
+        loginVisually("persistent@test.es", "123");
+
+        scenario.close(); // Simulamos "matar" la app
+
+        ActivityScenario.launch(loginActivity.class);
+        Espresso.onView(ViewMatchers.withId(R.id.tvListTitle))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
 }

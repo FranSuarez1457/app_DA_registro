@@ -2,7 +2,7 @@ package es.ulpgc.eite.da.templatedemo.app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.content.SharedPreferences;
 import es.ulpgc.eite.da.templatedemo.database.*;
 
 import es.ulpgc.eite.da.templatedemo.home.homeState;
@@ -29,6 +29,7 @@ public class AppMediator {
     private static AppMediator INSTANCE;
 
     public boolean isFavoriteFilterActive = false;
+    private boolean sessionChecked = false;
 
     private homeState savedHomeState;
     private loginState savedLoginState;
@@ -47,12 +48,46 @@ public class AppMediator {
 
     public void setLoggedUser(UserEntity loggedUser) {
         this.loggedUser = loggedUser;
+        if (loggedUser == null) {
+            sessionChecked = true;
+        }
     }
+
     private AppMediator() { }
 
     public static AppMediator getInstance() {
         if (INSTANCE == null) { INSTANCE = new AppMediator(); }
         return INSTANCE;
+    }
+
+    public void saveSession(Context context, UserEntity user) {
+        SharedPreferences prefs = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        if (user != null) {
+            editor.putString("user_email", user.email);
+            editor.putString("user_pass", user.password);
+            editor.putString("user_domain", user.companyDomain);
+            sessionChecked = true;
+        } else {
+            editor.clear();
+        }
+        editor.commit();
+    }
+
+    public void loadSession(Context context) {
+        if (sessionChecked && loggedUser == null) return;
+        if (loggedUser != null) return;
+
+        SharedPreferences prefs = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        String email = prefs.getString("user_email", null);
+        if (email != null) {
+            UserEntity user = new UserEntity();
+            user.email = email;
+            user.password = prefs.getString("user_pass", "");
+            user.companyDomain = prefs.getString("user_domain", "");
+            this.loggedUser = user;
+        }
+        sessionChecked = true;
     }
 
     public homeState getHomeState() { return savedHomeState; }

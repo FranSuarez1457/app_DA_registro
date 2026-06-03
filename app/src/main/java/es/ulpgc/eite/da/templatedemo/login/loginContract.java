@@ -9,6 +9,7 @@ public interface loginContract {
         void displayData(loginViewModel viewModel);
         void navigateToHome();
         void navigateToRegister();
+        void showErrorMessage(String message);
     }
 
     interface Presenter {
@@ -21,8 +22,10 @@ public interface loginContract {
         void onGuestButtonClicked();
     }
 
+    // En loginContract.java
     interface Model {
         boolean loginUser(String email, String password);
         void loginGuest();
+        boolean userExists(String email);
     }
 }

@@ -1,6 +1,7 @@
 package es.ulpgc.eite.da.templatedemo.registerProject;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,8 @@ public class registerProjectActivity extends AppCompatActivity implements regist
         etProjectDescription = findViewById(R.id.etProjectDescription);
         etProjectDate = findViewById(R.id.etProjectDate);
         btnSubmitProject = findViewById(R.id.btnSubmitProject);
+
+        etProjectName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
 
         registerProjectScreen.configure(this);
 

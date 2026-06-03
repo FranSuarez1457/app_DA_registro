@@ -29,10 +29,18 @@ public class loginPresenter implements loginContract.Presenter {
 
     @Override
     public void onLoginButtonClicked(String email, String password) {
+        // Primero, validación básica de campos
+        if (email.isEmpty() || password.isEmpty()) {
+            view.get().showErrorMessage("Error: Los campos no pueden estar vacíos");
+            return;
+        }
+
         boolean isSuccess = model.loginUser(email, password);
 
         if (isSuccess) {
             view.get().navigateToHome();
+        } else {
+            view.get().showErrorMessage("Error: Credenciales incorrectas");
         }
     }
 
