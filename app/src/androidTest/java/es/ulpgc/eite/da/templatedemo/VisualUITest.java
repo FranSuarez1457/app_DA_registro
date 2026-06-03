@@ -115,7 +115,6 @@ public class VisualUITest {
         Espresso.onView(ViewMatchers.withId(R.id.btnFavorite)).perform(forceClick());
         Thread.sleep(500);
 
-        // Comprobación segura
         Espresso.onView(ViewMatchers.withId(R.id.btnFavorite))
                 .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     }
@@ -355,4 +354,3 @@ public class VisualUITest {
                 .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     }
 }
-
