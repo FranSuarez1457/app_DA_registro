@@ -1,7 +1,6 @@
 package es.ulpgc.eite.da.templatedemo.status;
 
 import java.lang.ref.WeakReference;
-import es.ulpgc.eite.da.templatedemo.app.AppMediator;
 
 public class statusPresenter implements statusContract.Presenter {
 
@@ -25,13 +24,11 @@ public class statusPresenter implements statusContract.Presenter {
 
     @Override
     public void onResume() {
-        // Le pasamos a la pantalla el mensaje y si fue un éxito o un error
         view.get().displayData(state);
     }
 
     @Override
     public void onAcceptButtonClicked() {
-        // Cuando el usuario lea el mensaje y pulse el botón, lo mandamos de vuelta al Home
         view.get().navigateToHome();
     }
 }

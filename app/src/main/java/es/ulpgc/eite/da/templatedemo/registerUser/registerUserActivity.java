@@ -32,8 +32,6 @@ public class registerUserActivity extends AppCompatActivity implements registerU
             public void onClick(View v) {
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
-
-                // Le pasamos solo email y contraseña al Presenter
                 presenter.onRegisterButtonClicked(email, password);
             }
         });
@@ -52,7 +50,6 @@ public class registerUserActivity extends AppCompatActivity implements registerU
 
     @Override
     public void displayData(registerUserViewModel viewModel) {
-        // Reservado para mostrar errores
     }
 
     @Override

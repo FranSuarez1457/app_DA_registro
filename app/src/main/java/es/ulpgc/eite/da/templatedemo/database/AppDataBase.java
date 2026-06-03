@@ -5,10 +5,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-
 @Database(entities = {UserEntity.class, ProjectEntity.class, TaskEntity.class, FavoriteEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
-
 
     public abstract UserDao userDao();
     public abstract ProjectDao projectDao();
@@ -21,7 +19,6 @@ public abstract class AppDataBase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (AppDataBase.class) {
                 if (INSTANCE == null) {
-
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDataBase.class, "empresa_database")
                             .fallbackToDestructiveMigration()

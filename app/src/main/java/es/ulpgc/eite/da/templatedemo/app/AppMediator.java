@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.util.Log;
 import es.ulpgc.eite.da.templatedemo.database.*;
 
-// Importa todos tus estados
 import es.ulpgc.eite.da.templatedemo.home.homeState;
 import es.ulpgc.eite.da.templatedemo.login.loginState;
 import es.ulpgc.eite.da.templatedemo.projectList.projectListState;
@@ -15,7 +14,6 @@ import es.ulpgc.eite.da.templatedemo.registerTask.registerTaskState;
 import es.ulpgc.eite.da.templatedemo.registerUser.registerUserState;
 import es.ulpgc.eite.da.templatedemo.status.statusState;
 
-// Importa tus Activities
 import es.ulpgc.eite.da.templatedemo.home.homeActivity;
 import es.ulpgc.eite.da.templatedemo.login.loginActivity;
 import es.ulpgc.eite.da.templatedemo.projectList.projectListActivity;
@@ -30,10 +28,8 @@ public class AppMediator {
     public static String TAG = "AppMediator";
     private static AppMediator INSTANCE;
 
-    // --- ¡NUESTRO INTERRUPTOR PARA EL FILTRO! ---
     public boolean isFavoriteFilterActive = false;
 
-    // Estados guardados
     private homeState savedHomeState;
     private loginState savedLoginState;
     private projectListState savedProjectListState;
@@ -52,14 +48,13 @@ public class AppMediator {
     public void setLoggedUser(UserEntity loggedUser) {
         this.loggedUser = loggedUser;
     }
-    private AppMediator() { Log.e(TAG, "AppMediator creado"); }
+    private AppMediator() { }
 
     public static AppMediator getInstance() {
         if (INSTANCE == null) { INSTANCE = new AppMediator(); }
         return INSTANCE;
     }
 
-    // --- MÉTODOS DE GET/SET DE ESTADOS ---
     public homeState getHomeState() { return savedHomeState; }
     public void setHomeState(homeState state) { savedHomeState = state; }
 
@@ -83,8 +78,6 @@ public class AppMediator {
 
     public statusState getStatusState() { return savedStatusState; }
     public void setStatusState(statusState state) { savedStatusState = state; }
-
-    // --- MÉTODOS DE NAVEGACIÓN ---
 
     public void goToLogin(Context context) {
         context.startActivity(new Intent(context, loginActivity.class));

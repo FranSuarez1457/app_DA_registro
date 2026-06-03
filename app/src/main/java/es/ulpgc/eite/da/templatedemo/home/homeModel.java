@@ -6,7 +6,6 @@ public class homeModel implements homeContract.Model {
 
     @Override
     public boolean isGuestUser() {
-        // Si es null, devuelve 'true' (es un invitado)
         return AppMediator.getInstance().getLoggedUser() == null;
     }
 }

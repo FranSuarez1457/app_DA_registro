@@ -8,7 +8,7 @@ public interface projectListContract {
 
     interface View {
         void injectPresenter(Presenter presenter);
-        void displayData(projectListState state); // O projectListViewModel si usas ViewModel
+        void displayData(projectListState state);
         void navigateToProjectDetail();
     }
 
@@ -21,7 +21,6 @@ public interface projectListContract {
 
     interface Model {
         List<ProjectEntity> getProjectList();
-        // --- LA NUEVA ORDEN PARA EL FILTRO ---
         List<ProjectEntity> getFavoriteProjects();
     }
 }

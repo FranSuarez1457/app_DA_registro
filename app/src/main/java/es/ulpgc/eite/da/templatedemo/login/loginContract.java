@@ -7,7 +7,6 @@ public interface loginContract {
     interface View {
         void injectPresenter(Presenter presenter);
         void displayData(loginViewModel viewModel);
-        // Métodos de navegación que ya deberías tener en tu Activity
         void navigateToHome();
         void navigateToRegister();
     }
@@ -23,7 +22,6 @@ public interface loginContract {
     }
 
     interface Model {
-
         boolean loginUser(String email, String password);
         void loginGuest();
     }

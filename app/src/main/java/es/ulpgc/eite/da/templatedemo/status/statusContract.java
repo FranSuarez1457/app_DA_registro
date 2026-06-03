@@ -7,7 +7,7 @@ public interface statusContract {
     interface View {
         void injectPresenter(Presenter presenter);
         void displayData(statusViewModel viewModel);
-        void navigateToHome(); // Para volver al menú cuando el usuario pulse "Aceptar"
+        void navigateToHome();
     }
 
     interface Presenter {
@@ -18,6 +18,5 @@ public interface statusContract {
     }
 
     interface Model {
-        // En este caso, el modelo casi no tiene trabajo porque los datos vienen del Mediador
     }
 }

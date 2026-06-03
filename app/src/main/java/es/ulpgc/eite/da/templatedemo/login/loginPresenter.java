@@ -29,15 +29,10 @@ public class loginPresenter implements loginContract.Presenter {
 
     @Override
     public void onLoginButtonClicked(String email, String password) {
-        // Llamamos a la base de datos a través del modelo
         boolean isSuccess = model.loginUser(email, password);
 
         if (isSuccess) {
-            // Si las credenciales son correctas, entramos a la app
             view.get().navigateToHome();
-        } else {
-            // Si fallan, de momento no hace nada (se queda en la pantalla).
-            // En el futuro aquí le diríamos a la View que muestre un Toast de error.
         }
     }
 

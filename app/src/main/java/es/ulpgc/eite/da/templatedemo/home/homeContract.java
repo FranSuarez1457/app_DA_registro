@@ -11,7 +11,7 @@ public interface homeContract {
         void navigateToRegisterTask();
         void navigateToProjectList();
         void showGuestMessage();
-        void showFavoritesMessage(); // <-- AÑADE ESTA LÍNEA
+        void showFavoritesMessage();
     }
 
     interface Presenter {
@@ -21,7 +21,7 @@ public interface homeContract {
         void onRegisterProjectBtnClicked();
         void onRegisterTaskBtnClicked();
         void onProjectListBtnClicked();
-        void onFavoritesBtnClicked(); // <-- AÑADE ESTA LÍNEA
+        void onFavoritesBtnClicked();
     }
 
     interface Model {

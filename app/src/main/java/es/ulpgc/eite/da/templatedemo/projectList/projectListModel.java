@@ -8,7 +8,7 @@ import es.ulpgc.eite.da.templatedemo.app.AppMediator;
 import es.ulpgc.eite.da.templatedemo.database.AppDataBase;
 import es.ulpgc.eite.da.templatedemo.database.ProjectEntity;
 import es.ulpgc.eite.da.templatedemo.database.UserEntity;
-import es.ulpgc.eite.da.templatedemo.database.FavoriteEntity; // IMPORTANTE
+import es.ulpgc.eite.da.templatedemo.database.FavoriteEntity;
 
 public class projectListModel implements projectListContract.Model {
 

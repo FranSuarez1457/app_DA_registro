@@ -17,8 +17,6 @@ public class registerUserScreen {
         }
 
         registerUserContract.Presenter presenter = new registerUserPresenter(state);
-
-        // Le pasamos el contexto de la pantalla al modelo para que pueda abrir la Base de Datos
         registerUserContract.Model model = new registerUserModel(context.get());
 
         presenter.injectModel(model);

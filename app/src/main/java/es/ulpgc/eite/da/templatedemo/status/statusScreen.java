@@ -11,10 +11,8 @@ public class statusScreen {
 
         AppMediator mediator = AppMediator.getInstance();
 
-        // ¡Magia! Cogemos el estado que nos haya dejado la pantalla anterior
         statusState state = mediator.getStatusState();
 
-        // Por si acaso entramos por error y no hay estado, creamos uno vacío
         if (state == null) {
             state = new statusState();
             state.message = "Estado desconocido";

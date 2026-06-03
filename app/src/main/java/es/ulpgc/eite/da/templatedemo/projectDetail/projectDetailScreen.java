@@ -17,8 +17,6 @@ public class projectDetailScreen {
         }
 
         projectDetailContract.Presenter presenter = new projectDetailPresenter(state);
-
-        // ¡CAMBIO AQUÍ! Pasamos el contexto al modelo
         projectDetailContract.Model model = new projectDetailModel(context.get());
 
         presenter.injectModel(model);

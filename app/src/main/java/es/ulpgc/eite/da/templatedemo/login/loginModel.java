@@ -10,14 +10,12 @@ public class loginModel implements loginContract.Model {
     private AppDataBase db;
 
     public loginModel(Context context) {
-        // Inicializamos la conexión a la base de datos
         db = AppDataBase.getInstance(context);
     }
 
     @Override
     public boolean loginUser(String email, String password) {
         if (email == null || password == null) return false;
-
 
         UserEntity user = db.userDao().login(email, password);
 

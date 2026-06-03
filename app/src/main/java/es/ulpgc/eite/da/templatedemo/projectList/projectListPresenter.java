@@ -30,14 +30,12 @@ public class projectListPresenter implements projectListContract.Presenter {
     public void onResume() {
         List<ProjectEntity> realProjects;
 
-        // ¡EL INTERRUPTOR EN ACCIÓN!
         if (AppMediator.getInstance().isFavoriteFilterActive) {
             realProjects = model.getFavoriteProjects();
         } else {
             realProjects = model.getProjectList();
         }
 
-        // Extraemos solo el "nombre" de cada proyecto para la vista
         List<String> projectNames = new ArrayList<>();
         if (realProjects != null) {
             for (ProjectEntity project : realProjects) {

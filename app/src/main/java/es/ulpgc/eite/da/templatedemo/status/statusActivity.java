@@ -13,7 +13,6 @@ public class statusActivity extends AppCompatActivity implements statusContract.
 
     private statusContract.Presenter presenter;
 
-    // Variables con los IDs exactos de tu status.xml
     private TextView tvCompanyNameStatus;
     private TextView tvStatusMessage;
 
@@ -21,17 +20,13 @@ public class statusActivity extends AppCompatActivity implements statusContract.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Apuntamos a tu archivo status.xml
         setContentView(R.layout.status);
 
-        // 1. Enlazamos las vistas
         tvCompanyNameStatus = findViewById(R.id.tvCompanyNameStatus);
         tvStatusMessage = findViewById(R.id.tvStatusMessage);
 
-        // 2. Configuramos el ensamblador
         statusScreen.configure(this);
 
-        // 3. Como no hay botón, hacemos que tocar el texto sirva para salir
         tvStatusMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,24 +48,21 @@ public class statusActivity extends AppCompatActivity implements statusContract.
 
     @Override
     public void displayData(statusViewModel viewModel) {
-        // Pintamos el mensaje que nos ha mandado el Mediador
         tvStatusMessage.setText(viewModel.message);
 
-        // EXTRA: Cambiamos el color dependiendo de si fue bien o mal
         if (viewModel.isSuccess) {
-            tvStatusMessage.setTextColor(Color.parseColor("#4CAF50")); // Verde para éxito
+            tvStatusMessage.setTextColor(Color.parseColor("#4CAF50"));
         } else {
-            tvStatusMessage.setTextColor(Color.parseColor("#F44336")); // Rojo para error
+            tvStatusMessage.setTextColor(Color.parseColor("#F44336"));
         }
     }
 
     @Override
     public void navigateToHome() {
         AppMediator.getInstance().goToHome(this);
-        finish(); // Cerramos esta pantalla
+        finish();
     }
 
-    // EXTRA: Si el usuario le da al botón "Atrás" del móvil, también hace el circuito correcto
     @Override
     public void onBackPressed() {
         super.onBackPressed();

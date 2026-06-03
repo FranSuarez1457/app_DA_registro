@@ -14,7 +14,6 @@ public class homeActivity extends AppCompatActivity implements homeContract.View
 
     private homeContract.Presenter presenter;
 
-    // Variables con los IDs exactos de tu home.xml
     private TextView tvCompanyBarHome;
     private Button btnNavRegisterProject;
     private Button btnNavRegisterTask;
@@ -27,17 +26,14 @@ public class homeActivity extends AppCompatActivity implements homeContract.View
 
         setContentView(R.layout.home);
 
-        // 1. Enlazar las vistas
         tvCompanyBarHome = findViewById(R.id.tvCompanyBarHome);
         btnNavRegisterProject = findViewById(R.id.btnNavRegisterProject);
         btnNavRegisterTask = findViewById(R.id.btnNavRegisterTask);
         btnNavProjectList = findViewById(R.id.btnNavProjectList);
         btnNavFavorites = findViewById(R.id.btnNavFavorites);
 
-        // 2. Configurar el ensamblador
         homeScreen.configure(this);
 
-        // 3. Programar los clics de los botones
         btnNavRegisterProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +76,6 @@ public class homeActivity extends AppCompatActivity implements homeContract.View
 
     @Override
     public void displayData(homeViewModel viewModel) {
-        // Opcional: Podrías cambiar el texto de la barra superior por el nombre del usuario
-        // tvCompanyBarHome.setText(viewModel.welcomeMessage);
     }
 
     @Override
@@ -101,14 +95,11 @@ public class homeActivity extends AppCompatActivity implements homeContract.View
 
     @Override
     public void showFavoritesMessage() {
-        // Como aún no tenemos una Activity específica para favoritos en el Manifiesto ni Mediador,
-        // dejamos un aviso temporal para que la app no se cierre al pulsarlo.
         Toast.makeText(this, "Pantalla de Favoritos en construcción", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showGuestMessage() {
-        // Importa android.widget.Toast si te sale en rojo (Alt + Enter)
         android.widget.Toast.makeText(this,
                 "Modo Invitado: Permisos insuficientes para crear registros.",
                 android.widget.Toast.LENGTH_LONG).show();

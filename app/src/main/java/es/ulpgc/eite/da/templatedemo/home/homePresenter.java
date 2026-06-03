@@ -48,17 +48,13 @@ public class homePresenter implements homeContract.Presenter {
 
     @Override
     public void onProjectListBtnClicked() {
-        // Apagamos el filtro para ver todos los proyectos
         AppMediator.getInstance().isFavoriteFilterActive = false;
         view.get().navigateToProjectList();
     }
 
     @Override
     public void onFavoritesBtnClicked() {
-        // Encendemos el filtro para ver solo favoritos
         AppMediator.getInstance().isFavoriteFilterActive = true;
-
-        // ¡OJO! Viajamos a la MISMA pantalla de proyectos, reciclando la vista
         view.get().navigateToProjectList();
     }
 }

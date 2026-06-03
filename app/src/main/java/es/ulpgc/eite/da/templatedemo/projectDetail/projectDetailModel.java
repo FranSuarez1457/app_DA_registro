@@ -18,17 +18,12 @@ public class projectDetailModel implements projectDetailContract.Model {
     public boolean addToFavorites() {
         UserEntity currentUser = AppMediator.getInstance().getLoggedUser();
 
-        // Si es un invitado, no le dejamos guardar favoritos
         if (currentUser == null) return false;
 
         FavoriteEntity newFavorite = new FavoriteEntity();
         newFavorite.userEmail = currentUser.email;
+        newFavorite.projectId = 1;
 
-        // De momento ponemos un nombre fijo. En el futuro,
-        // aquí sacaremos el nombre del proyecto real que el usuario está viendo.
-        newFavorite.projectName = "Proyecto Seleccionado";
-
-        // Lo guardamos en la base de datos
         db.favoriteDao().insertFavorite(newFavorite);
 
         return true;

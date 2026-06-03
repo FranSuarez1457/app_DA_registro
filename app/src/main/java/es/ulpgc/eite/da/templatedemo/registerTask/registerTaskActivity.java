@@ -14,7 +14,6 @@ public class registerTaskActivity extends AppCompatActivity implements registerT
 
     private registerTaskContract.Presenter presenter;
 
-    // Vistas exactas de tu XML
     private TextView tvCompanyBarRegTask;
     private EditText etTaskProject;
     private EditText etTaskName;
@@ -25,29 +24,23 @@ public class registerTaskActivity extends AppCompatActivity implements registerT
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Apuntamos a tu archivo register_task.xml
         setContentView(R.layout.register_task);
 
-        // 1. Enlazamos los IDs
         tvCompanyBarRegTask = findViewById(R.id.tvCompanyBarRegTask);
         etTaskProject = findViewById(R.id.etTaskProject);
         etTaskName = findViewById(R.id.etTaskName);
         etTaskResponsible = findViewById(R.id.etTaskResponsible);
         btnSubmitTask = findViewById(R.id.btnSubmitTask);
 
-        // 2. Configuramos el ensamblador
         registerTaskScreen.configure(this);
 
-        // 3. Programamos el clic del botón
         btnSubmitTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Recogemos los textos de los EditText
                 String project = etTaskProject.getText().toString();
                 String taskName = etTaskName.getText().toString();
                 String responsible = etTaskResponsible.getText().toString();
 
-                // Le pasamos todo al Presenter
                 presenter.onRegisterBtnClicked(project, taskName, responsible);
             }
         });
@@ -66,12 +59,11 @@ public class registerTaskActivity extends AppCompatActivity implements registerT
 
     @Override
     public void displayData(registerTaskViewModel viewModel) {
-        // En un futuro pondremos el nombre de la empresa aquí
     }
 
     @Override
     public void navigateToStatus() {
         AppMediator.getInstance().goToStatus(this);
-        finish(); // Cerramos esta pantalla para evitar que se acumule atrás
+        finish();
     }
 }

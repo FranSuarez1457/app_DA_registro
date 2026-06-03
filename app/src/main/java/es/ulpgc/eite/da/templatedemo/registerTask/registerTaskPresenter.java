@@ -31,10 +31,8 @@ public class registerTaskPresenter implements registerTaskContract.Presenter {
 
     @Override
     public void onRegisterBtnClicked(String project, String taskName, String responsible) {
-        // 1. Verificamos si la tarea es válida
         boolean isSuccess = model.registerNewTask(project, taskName, responsible);
 
-        // 2. Preparamos el mensaje para la pantalla Status
         statusState newStatus = new statusState();
         newStatus.isSuccess = isSuccess;
 
@@ -44,10 +42,7 @@ public class registerTaskPresenter implements registerTaskContract.Presenter {
             newStatus.message = "Error: Es obligatorio indicar un nombre para la tarea.";
         }
 
-        // 3. Guardamos el estado en el Mediador
         AppMediator.getInstance().setStatusState(newStatus);
-
-        // 4. Viajamos a la pantalla de estado
         view.get().navigateToStatus();
     }
 }

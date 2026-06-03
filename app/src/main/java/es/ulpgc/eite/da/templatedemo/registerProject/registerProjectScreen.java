@@ -17,8 +17,6 @@ public class registerProjectScreen {
         }
 
         registerProjectContract.Presenter presenter = new registerProjectPresenter(state);
-
-        // ¡Pasamos el contexto al modelo!
         registerProjectContract.Model model = new registerProjectModel(context.get());
 
         presenter.injectModel(model);
