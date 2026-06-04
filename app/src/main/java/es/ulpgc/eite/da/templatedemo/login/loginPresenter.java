@@ -29,7 +29,6 @@ public class loginPresenter implements loginContract.Presenter {
 
     @Override
     public void onLoginButtonClicked(String email, String password) {
-        // Primero, validación básica de campos
         if (email.isEmpty() || password.isEmpty()) {
             view.get().showErrorMessage("Error: Los campos no pueden estar vacíos");
             return;

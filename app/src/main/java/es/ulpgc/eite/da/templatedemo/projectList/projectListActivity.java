@@ -29,7 +29,6 @@ public class projectListActivity extends AppCompatActivity implements projectLis
     @Override
     protected void onResume() {
         super.onResume();
-        // Al volver a la pantalla, pedimos al presentador que recargue los datos
         presenter.onResume();
     }
 
@@ -48,7 +47,6 @@ public class projectListActivity extends AppCompatActivity implements projectLis
         if (state.projectList != null && !state.projectList.isEmpty()) {
             android.view.LayoutInflater inflater = getLayoutInflater();
 
-            // CORRECCIÓN: Iteramos sobre Strings, no sobre ProjectEntity
             for (String projectName : state.projectList) {
 
                 android.view.View itemView = inflater.inflate(R.layout.item_project, container, false);
@@ -56,7 +54,6 @@ public class projectListActivity extends AppCompatActivity implements projectLis
                 android.widget.TextView tvName = itemView.findViewById(R.id.tvProjectNameItem1);
                 android.view.View cardProject = itemView.findViewById(R.id.cardProject1);
 
-                // Ponemos el texto directamente
                 tvName.setText(projectName);
 
                 cardProject.setOnClickListener(new android.view.View.OnClickListener() {

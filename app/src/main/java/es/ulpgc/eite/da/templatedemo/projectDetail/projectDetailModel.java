@@ -21,13 +21,12 @@ public class projectDetailModel implements projectDetailContract.Model {
     }
 
     @Override
-    public ProjectEntity getProjectByName(String name) { // Esto ya no dará error
+    public ProjectEntity getProjectByName(String name) {
         return db.projectDao().getProjectByName(name);
     }
 
     @Override
     public List<String> getTaskNamesByProjectId(int projectId) {
-        // Consultamos las tareas en la BBDD filtrando por el ID del proyecto
         List<TaskEntity> tasks = db.taskDao().getTasksByProjectId(projectId);
         List<String> names = new ArrayList<>();
         for (TaskEntity task : tasks) {

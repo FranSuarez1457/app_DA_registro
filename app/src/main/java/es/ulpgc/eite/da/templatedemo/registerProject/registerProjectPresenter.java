@@ -29,7 +29,6 @@ public class registerProjectPresenter implements registerProjectContract.Present
 
     @Override
     public void onSaveButtonClicked(String projectName, String projectDescription) {
-        // Aquí pasamos las variables correctas
         boolean success = model.saveProject(projectName, projectDescription);
 
         if (success) {

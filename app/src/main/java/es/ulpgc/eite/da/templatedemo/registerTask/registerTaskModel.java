@@ -9,7 +9,6 @@ public class registerTaskModel implements registerTaskContract.Model {
 
     private AppDataBase db;
 
-    // Necesitamos el contexto para abrir la base de datos
     public registerTaskModel(Context context) {
         db = AppDataBase.getInstance(context);
     }

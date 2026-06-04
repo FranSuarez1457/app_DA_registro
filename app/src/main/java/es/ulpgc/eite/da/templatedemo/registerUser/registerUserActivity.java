@@ -62,6 +62,6 @@ public class registerUserActivity extends AppCompatActivity implements registerU
     @Override
     public void showErrorMessage() {
         TextView tvError = findViewById(R.id.tvRegisterError);
-        tvError.setVisibility(View.VISIBLE); // Mostramos el texto rojo
+        tvError.setVisibility(View.VISIBLE);
     }
 }

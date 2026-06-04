@@ -1,8 +1,7 @@
 package es.ulpgc.eite.da.templatedemo.projectDetail;
 
-import androidx.fragment.app.FragmentActivity;
-import java.lang.ref.WeakReference;
-import es.ulpgc.eite.da.templatedemo.app.AppMediator;
+
+
 
 public class projectDetailScreen {
 
