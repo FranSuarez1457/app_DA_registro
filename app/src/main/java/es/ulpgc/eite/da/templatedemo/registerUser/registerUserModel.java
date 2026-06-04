@@ -13,6 +13,10 @@ public class registerUserModel implements registerUserContract.Model {
     }
 
     @Override
+    public UserEntity getUserByEmail(String email) {
+        return db.userDao().getUserByEmail(email);
+    }
+    @Override
     public boolean registerNewUser(String email, String password) {
         if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
             return false;

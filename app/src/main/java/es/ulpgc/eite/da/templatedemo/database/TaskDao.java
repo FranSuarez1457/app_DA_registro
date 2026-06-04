@@ -13,4 +13,10 @@ public interface TaskDao {
 
     @Query("SELECT * FROM tasks WHERE parentProjectId = :projectId")
     List<TaskEntity> getTasksForProject(int projectId);
+
+    @Query("SELECT * FROM tasks WHERE parentProjectId = :pid")
+    List<TaskEntity> getTasksByProjectId(int pid);
+
+    @Query("SELECT * FROM projects WHERE name = :projectName LIMIT 1")
+    ProjectEntity getProjectByName(String projectName);
 }

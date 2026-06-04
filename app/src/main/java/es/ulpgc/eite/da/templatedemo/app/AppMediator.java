@@ -29,6 +29,7 @@ public class AppMediator {
     private static AppMediator INSTANCE;
 
     public boolean isFavoriteFilterActive = false;
+    public String currentProjectName;
     private boolean sessionChecked = false;
 
     private homeState savedHomeState;

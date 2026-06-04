@@ -1,8 +1,11 @@
 package es.ulpgc.eite.da.templatedemo.projectDetail;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,8 +57,24 @@ public class projectDetailActivity extends AppCompatActivity implements projectD
         tvDetailTitle.setText(viewModel.projectName);
         tvProjectDate.setText(viewModel.projectDate);
         tvProjectDescription.setText(viewModel.projectDescription);
-
         updateFavoriteIcon(viewModel.isFavorite);
+
+        LinearLayout container = findViewById(R.id.tasksContainer);
+        if (container != null) {
+            container.removeAllViews();
+
+            if (viewModel.taskList != null && !viewModel.taskList.isEmpty()) {
+                LayoutInflater inflater = getLayoutInflater();
+
+                for (String taskName : viewModel.taskList) {
+                    Button btnTask = (Button) inflater.inflate(R.layout.item_task, container, false);
+
+                    btnTask.setText(taskName);
+
+                    container.addView(btnTask);
+                }
+            }
+        }
     }
 
     public void updateFavoriteIcon(boolean isFavorite) {

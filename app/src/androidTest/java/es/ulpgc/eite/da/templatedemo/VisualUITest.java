@@ -306,7 +306,7 @@ public class VisualUITest {
     }
 
     @Test
-    public void visualTest_11() throws InterruptedException {
+    public void visualTest_11_MassiveData_NewUserCompleteLifecycle() throws InterruptedException {
         injectUniversityMassiveData("ulpgc.es", 2000);
         injectUniversityMassiveData("ull.es", 3000);
         injectUniversityMassiveData("upv.es", 4000);
@@ -427,14 +427,17 @@ public class VisualUITest {
     public void visualTest_17_ProjectNameLimit() throws InterruptedException {
         injectTestUser("u@u.es", "u.es");
         ActivityScenario.launch(loginActivity.class);
+
         loginVisually("u@u.es", "123");
-        goToProjectListVisually();
+
         Espresso.onView(ViewMatchers.withId(R.id.btnNavRegisterProject)).perform(forceClick());
+        Thread.sleep(500); // Pequeña pausa por seguridad
 
         String longName = "EsteNombreEsExtremadamenteLargoYSuperaLos20Caracteres";
         String expected = longName.substring(0, 20); // Solo los primeros 20
 
         Espresso.onView(ViewMatchers.withId(R.id.etProjectName)).perform(ViewActions.replaceText(longName));
+        Espresso.closeSoftKeyboard();
 
         Espresso.onView(ViewMatchers.withId(R.id.etProjectName))
                 .check(ViewAssertions.matches(ViewMatchers.withText(expected)));

@@ -8,6 +8,8 @@ public interface registerProjectContract {
         void injectPresenter(Presenter presenter);
         void displayData(registerProjectViewModel viewModel);
         void finishView();
+
+        void showErrorMessage(String s);
     }
 
     interface Presenter {

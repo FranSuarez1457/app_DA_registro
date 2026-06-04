@@ -6,14 +6,13 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "projects")
 public class ProjectEntity {
 
+    // AÑADE ESTO: (autoGenerate = true)
     @PrimaryKey(autoGenerate = true)
     public int projectId;
 
     public String name;
     public String description;
     public String startDate;
-
     public String companyDomain;
-
     public String creatorEmail;
 }

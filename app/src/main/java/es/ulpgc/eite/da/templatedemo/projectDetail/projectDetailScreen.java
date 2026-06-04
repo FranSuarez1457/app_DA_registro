@@ -7,21 +7,16 @@ import es.ulpgc.eite.da.templatedemo.app.AppMediator;
 public class projectDetailScreen {
 
     public static void configure(projectDetailContract.View view) {
-        WeakReference<FragmentActivity> context = new WeakReference<>((FragmentActivity) view);
+        android.content.Context context = ((android.app.Activity) view).getApplicationContext();
 
-        AppMediator mediator = AppMediator.getInstance();
-        projectDetailState state = mediator.getProjectDetailState();
+        projectDetailContract.Model model = new projectDetailModel(context);
 
-        if (state == null) {
-            state = new projectDetailState();
-        }
+        projectDetailState state = new projectDetailState();
 
-        projectDetailContract.Presenter presenter = new projectDetailPresenter(state);
-        projectDetailContract.Model model = new projectDetailModel(context.get());
+        projectDetailContract.Presenter presenter = new projectDetailPresenter(model);
 
         presenter.injectModel(model);
-        presenter.injectView(new WeakReference<>(view));
-
+        presenter.injectView(new java.lang.ref.WeakReference<>(view));
         view.injectPresenter(presenter);
     }
 }

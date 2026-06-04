@@ -16,6 +16,11 @@ public class loginModel implements loginContract.Model {
     }
 
     @Override
+    public UserEntity getUserByEmail(String email) {
+        return db.userDao().getUserByEmail(email);
+    }
+
+    @Override
     public boolean loginUser(String email, String password) {
         if (email == null || password == null) return false;
 

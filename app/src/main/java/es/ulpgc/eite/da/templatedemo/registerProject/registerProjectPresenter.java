@@ -29,10 +29,13 @@ public class registerProjectPresenter implements registerProjectContract.Present
 
     @Override
     public void onSaveButtonClicked(String projectName, String projectDescription) {
-        boolean isSuccess = model.saveProject(projectName, projectDescription);
+        // Aquí pasamos las variables correctas
+        boolean success = model.saveProject(projectName, projectDescription);
 
-        if (isSuccess) {
+        if (success) {
             view.get().finishView();
+        } else {
+            view.get().showErrorMessage("Error: Sesión expirada o datos inválidos");
         }
     }
 }

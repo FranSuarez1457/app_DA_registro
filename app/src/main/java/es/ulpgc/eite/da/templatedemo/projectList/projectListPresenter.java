@@ -28,27 +28,21 @@ public class projectListPresenter implements projectListContract.Presenter {
 
     @Override
     public void onResume() {
-        List<ProjectEntity> realProjects;
-
-        if (AppMediator.getInstance().isFavoriteFilterActive) {
-            realProjects = model.getFavoriteProjects();
-        } else {
-            realProjects = model.getProjectList();
-        }
-
+        List<ProjectEntity> realProjects = model.getProjectList();
         List<String> projectNames = new ArrayList<>();
+
         if (realProjects != null) {
             for (ProjectEntity project : realProjects) {
                 projectNames.add(project.name);
             }
         }
-
         state.projectList = projectNames;
         view.get().displayData(state);
     }
 
     @Override
     public void onProjectClicked(String projectName) {
+        AppMediator.getInstance().currentProjectName = projectName;
         view.get().navigateToProjectDetail();
     }
 }

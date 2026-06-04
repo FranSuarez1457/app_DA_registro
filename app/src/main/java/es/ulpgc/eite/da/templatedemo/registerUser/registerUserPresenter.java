@@ -32,6 +32,9 @@ public class registerUserPresenter implements registerUserContract.Presenter {
         boolean success = model.registerNewUser(email, password);
 
         if (success) {
+            es.ulpgc.eite.da.templatedemo.database.UserEntity user = model.getUserByEmail(email);
+            es.ulpgc.eite.da.templatedemo.app.AppMediator.getInstance().setLoggedUser(user);
+
             view.get().finishView();
         } else {
             view.get().showErrorMessage();

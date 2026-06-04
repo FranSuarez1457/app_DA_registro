@@ -2,6 +2,8 @@ package es.ulpgc.eite.da.templatedemo.login;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.eite.da.templatedemo.database.UserEntity;
+
 public interface loginContract {
 
     interface View {
@@ -27,5 +29,7 @@ public interface loginContract {
         boolean loginUser(String email, String password);
         void loginGuest();
         boolean userExists(String email);
+
+        UserEntity getUserByEmail(String email);
     }
 }

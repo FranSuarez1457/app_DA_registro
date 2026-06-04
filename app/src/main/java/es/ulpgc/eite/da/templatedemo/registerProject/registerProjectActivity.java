@@ -68,4 +68,8 @@ public class registerProjectActivity extends AppCompatActivity implements regist
         AppMediator.getInstance().goToProjectList(this);
         finish();
     }
+    @Override
+    public void showErrorMessage(String message) {
+        android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
+    }
 }

@@ -86,36 +86,6 @@
             android:paddingEnd="24dp"
             android:paddingBottom="24dp">
 
-            <Button
-                android:id="@+id/btnTask1"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="#9C27B0"
-                android:text="Tarea 1"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/btnTask2"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="#9C27B0"
-                android:text="Tarea 2"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/btnTask3"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="#9C27B0"
-                android:text="Tarea 3"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
         </LinearLayout>
     </ScrollView>
 

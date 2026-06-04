@@ -38,6 +38,9 @@ public class loginPresenter implements loginContract.Presenter {
         boolean isSuccess = model.loginUser(email, password);
 
         if (isSuccess) {
+            es.ulpgc.eite.da.templatedemo.database.UserEntity user = model.getUserByEmail(email);
+            es.ulpgc.eite.da.templatedemo.app.AppMediator.getInstance().setLoggedUser(user);
+
             view.get().navigateToHome();
         } else {
             view.get().showErrorMessage("Error: Credenciales incorrectas");

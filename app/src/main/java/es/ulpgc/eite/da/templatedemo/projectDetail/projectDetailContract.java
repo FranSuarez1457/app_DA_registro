@@ -1,6 +1,9 @@
 package es.ulpgc.eite.da.templatedemo.projectDetail;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
+
+import es.ulpgc.eite.da.templatedemo.database.ProjectEntity;
 
 public interface projectDetailContract {
 
@@ -19,5 +22,7 @@ public interface projectDetailContract {
 
     interface Model {
         boolean addToFavorites();
+        ProjectEntity getProjectByName(String name);
+        List<String> getTaskNamesByProjectId(int projectId);
     }
 }

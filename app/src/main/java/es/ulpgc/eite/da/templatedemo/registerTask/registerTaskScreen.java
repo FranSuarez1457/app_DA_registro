@@ -17,7 +17,7 @@ public class registerTaskScreen {
         }
 
         registerTaskContract.Presenter presenter = new registerTaskPresenter(state);
-        registerTaskContract.Model model = new registerTaskModel();
+        registerTaskContract.Model model = new registerTaskModel(context.get().getApplicationContext());
 
         presenter.injectModel(model);
         presenter.injectView(new WeakReference<>(view));

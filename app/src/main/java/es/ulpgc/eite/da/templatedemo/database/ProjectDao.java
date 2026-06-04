@@ -16,4 +16,7 @@ public interface ProjectDao {
 
     @Query("SELECT * FROM projects WHERE projectId = :id LIMIT 1")
     ProjectEntity getProjectById(int id);
+
+    @Query("SELECT * FROM projects WHERE name = :projectName LIMIT 1")
+    ProjectEntity getProjectByName(String projectName);
 }
